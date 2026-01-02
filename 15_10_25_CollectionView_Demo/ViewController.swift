@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     let reuseIdentifierForStudentCollectionViewCell = "StudentCollectionViewCell"
     var studentNames = ["Preeti","Monali","Prajakta","Shweta","Tanishka",
                         "Sujata","Saurabh","Mayur","Rameshwar","Preeti","Monali",
+                        "Prajakta","Shweta","Tanishka","Sujata","Sujata","Saurabh","Mayur","Rameshwar","Preeti","Monali",
                         "Prajakta","Shweta","Tanishka","Sujata"]
     
     override func viewDidLoad() {
@@ -45,9 +46,20 @@ extension ViewController : UICollectionViewDataSource{
 extension ViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viewWidth = self.view.frame.width
-        let cellDimensions = viewWidth/4.0 - 20.0
+        let cellDimensions = viewWidth/3.0 - 20.0
         print(viewWidth)
         print(cellDimensions)
         return CGSize(width: cellDimensions, height: cellDimensions)
+    }
+}
+
+extension ViewController : UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.section) -- \(indexPath.item)")
+    
+        let studentDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "StudentDetailsViewController") as? StudentDetailsViewController
+        
+        studentDetailsViewController?.studentNameContainer = studentNames[indexPath.item]
+        self.navigationController?.pushViewController(studentDetailsViewController!, animated: true)
     }
 }
