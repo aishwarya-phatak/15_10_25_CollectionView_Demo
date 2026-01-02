@@ -44,6 +44,10 @@ extension ViewController : UICollectionViewDataSource{
 
 extension ViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        let viewWidth = self.view.frame.width
+        let cellDimensions = viewWidth/4.0 - 20.0
+        print(viewWidth)
+        print(cellDimensions)
+        return CGSize(width: cellDimensions, height: cellDimensions)
     }
 }
